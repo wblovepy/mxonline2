@@ -1,0 +1,62 @@
+{% extends 'org_base.html' %}
+{% load static %}
+{% block title %}机构课程{% endblock %}
+{% block org_header %}
+                <div class="middle companyheader">
+                    <div class="wp">
+                        <img class="fl" style="width: 112px;height: 103px"  src="{{ MEDIA_URL }}{{ course_org.image }}"/>
+                        <div class="head fl">
+                            <h1>
+                                {{ course_org.name }}
+                                <img src="{% static 'images/authentication.png' %}"/></img>
+                                <img src="{% static 'images/gold.png' %}"/></img>
+                            </h1>
+                            <p class="fl">
+                                <span class="fl" style="margin-top:8px;color:#848484;">推荐指数： </span>
+                                <span class="precision company-credit" data-star-scope="3.0"></span>
+                                <span class="key">3.0</span>
+                            </p>
+                        </div>
+                        <div class="btn fr collectionbtn  notlogin"data-favid="22" data-fav-type="1">{% if has_fav %} 已收藏{% else %}收藏{% endif %}</div>
+                    </div>
+                </div>
+{% endblock %}
+
+
+
+{% block bread %}
+			<li>机构课程</li>
+{% endblock %}
+
+
+{% block content_right %}
+    <div class="right companycenter layout grouping" >
+		<div class="head">
+			<h1>全部课程</h1>
+			<a class="green fr more" href="{% url 'org:course' course_org.id %}">查看更多  >  </a>
+		</div>
+		<div class="brief group_list">
+            {% for course in all_course %}
+                <div class="module1_5 box">
+                    <a href="course-detail.html"><img width="214" src="{{ MEDIA_URL }}{{ course.image }}"/></a>
+                    <div class="des">
+                        <a href="course-detail.html"><h2>{{ course.name }}</h2></a>
+                        <span class="fl">课时：<i class="key">{{ course.learn_times }}</i></span>
+                        <span class="fr">参加人数：{{ course.students }}</span>
+                    </div>
+                    <div class="bottom">
+                        <span class="fl">{{ course.course_org.name }}</span>
+                         <span class="star fr  notlogin" data-favid="13"  data-fav-type="4">
+                            {{ course.fav_nums }}
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pageturn">
+                <ul class="pagelist">
+                    <li class="active"><a href="?page=1">1</a></li>
+                </ul>
+        </div>
+    </div>
+{% endblock %}
